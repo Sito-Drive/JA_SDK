@@ -1,0 +1,62 @@
+// {
+//     "version": "2.0.0",
+//     "tasks": [
+//         {
+//             "label": "Build C/C++ file",
+//             "type": "shell",
+//             "command": "/usr/bin/g++",
+//             "args": [
+//                 "-g",
+//                 "-I/home/mwj/桌面/JA_485/C++/Linux/include",
+//                 "-L/usr/local/lib",
+//                 "test.cpp",
+//                 "src/ja_motor_control.cpp",
+//                 "src/ja_multi_motor_control.cpp",
+//                 "-o",
+//                 "test",
+//                 "-lserial",
+//                 "-lstdc++"
+//             ],
+//             "group": {
+//                 "kind": "build",
+//                 "isDefault": true
+//             },
+//             "problemMatcher": ["$gcc"],
+//             "detail": "Task for building C/C++ files using G++."
+//         }
+//     ]
+// }
+{
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "Build C/C++ file",
+            "command": "/usr/bin/gcc",
+            "args": [
+                "-g",
+                "-I/home/mwj/桌面/JA_485/C++/Linux/include",
+                "-L/usr/local/lib",
+                "test.cpp",
+                "src/ja_motor_control.cpp",
+                "src/ja_multi_motor_control.cpp",
+                "-o",
+                "test",
+                "-lserial",
+                "-lstdc++",
+                "-lm"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "调试器生成的任务。"
+        }
+    ],
+    "version": "2.0.0"
+}
