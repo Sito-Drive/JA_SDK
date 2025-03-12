@@ -300,7 +300,7 @@ double MotorControl:: tra_point(double t, double T, double p0, double pT, double
     return position;
 }
 
-vector<int32_t> MotorControl:: trajectory(int initial_positions, int target_positions, double Hz, double duration, int num_points)
+vector<int32_t> MotorControl:: trajectory(int initial_positions, int target_positions, double duration, int num_points)
 {
     vector<int32_t> trajectories(num_points);
     vector<double> time_steps(num_points);
@@ -318,7 +318,7 @@ vector<int32_t> MotorControl:: trajectory(int initial_positions, int target_posi
 
 void MotorControl:: write_time_position(int initial_positions, int target_positions, double Hz, double duration, int num_points)
 {
-    vector<int32_t> positions = trajectory(initial_positions, target_positions, Hz, duration, num_points);
+    vector<int32_t> positions = trajectory(initial_positions, target_positions, duration, num_points);
     for (int32_t pos: positions)
     {
         tim_position(pos);
