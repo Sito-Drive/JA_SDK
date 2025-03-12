@@ -131,7 +131,7 @@ void MotorControl:: change_parameters(const SETTINGS address, const int16_t& val
 {
     vector <uint8_t> data;
     data = buildPacket(motor_id, static_cast<int16_t>(address), value);
-    cout << static_cast<int16_t>(address) << endl;
+    // cout << static_cast<int16_t>(address) << endl;
     send_data(data.data(), data.size());
 }
 
@@ -170,13 +170,14 @@ void MotorControl:: save()
     send_data(data.data(), data.size());
 }
 
-MotorStatus MotorControl::read(const bool& flag) 
+MotorStatus MotorControl::read(const bool& flag)
 {
     vector<uint8_t> data;
     vector<int32_t> output_data;
     MotorStatus status;
-    for (Mode i : ALL_PARAMETERS) 
+    for (Mode i : ALL_PARAMETERS)
     {
+        clearBuffer();
         data = buildPacket(motor_id, static_cast<uint8_t>(i), 2, static_cast<uint8_t>(Mode::READ));
         send_data(data.data(), data.size());
         vector<uint8_t> received_data = receive_data(10);

@@ -176,6 +176,25 @@ private:
         }
     }
 
+    void clearBuffer()
+    {
+        if (ser.isOpen())
+        {
+            ser.flush();
+            
+            vector<uint8_t> dumpBuffer(1024);
+            while (ser.available() > 0)
+            {
+                size_t numBytes = ser.read(dumpBuffer.data(), dumpBuffer.size());
+                if (numBytes == 0)
+                {
+                    break;
+                }
+                this_thread::sleep_for(chrono::milliseconds(1));
+            }
+        }
+    }
+
     vector<uint8_t> receive_data(size_t expected_size, uint16_t timeout_ms = 1000)
     {
         vector<uint8_t> buffer(expected_size);

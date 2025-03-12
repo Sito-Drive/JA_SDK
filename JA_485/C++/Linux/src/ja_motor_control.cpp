@@ -177,6 +177,7 @@ MotorStatus MotorControl::read(const bool& flag)
     MotorStatus status;
     for (Mode i : ALL_PARAMETERS) 
     {
+        clearBuffer();
         data = buildPacket(motor_id, static_cast<uint8_t>(i), 2, static_cast<uint8_t>(Mode::READ));
         send_data(data.data(), data.size());
         vector<uint8_t> received_data = receive_data(10);
