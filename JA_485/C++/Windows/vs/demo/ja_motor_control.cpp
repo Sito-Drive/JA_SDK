@@ -50,7 +50,8 @@ static const char* getModeName(Mode mode)
 MotorControl::MotorControl(const string& port, const uint32_t& baudrate, const uint8_t& motor_id)
 :motor_id(motor_id)
 {
-    hSerial = CreateFileA(port.c_str(), GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL);
+    string fixedPort = (port.find("COM") != string::npos && port.length() > 4) ? "\\\\.\\" + port : port;
+    hSerial = CreateFileA(fixedPort.c_str(), GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, 0, NULL);
     if (hSerial == INVALID_HANDLE_VALUE)
     {
         throw runtime_error("Unable to open serial port " + port);
