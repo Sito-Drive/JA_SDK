@@ -20,7 +20,7 @@ class MotorControl:
             self.ser.close()
             print("Serial port closed")
 
-    #CRC计算
+    #CRC
     def CRC16(self,buffer):
         temp = 0xFFFF 
         for byte in buffer:  
@@ -41,16 +41,12 @@ class MotorControl:
                 return response_array
 
         except serial.SerialException as e:
-            # print(f"串口通信异常: {e}")
             return COMMUNICATION_ABNORMALITY
         except ValueError as e:
-            # print(f"值错误: {e}")
             return VALUE_ERROR
         except IndexError as e:
-            # print(f"索引错误: {e}")
             return INDEX_ERROR
         except Exception as e:
-            # print(f"未知错误: {e}")
             return TIME_OUT
         
     def Hexadecimal_conversion(self,num):
@@ -106,7 +102,7 @@ class MotorControl:
             pack[CRC] = crc_int >> 8
             pack[CRC + 1] = crc_int & 0xff
         except Exception as e:
-            print(f"CRC计算失败: {e}")
+            print(f"CRC calculation failed: {e}")
             return None
         self.ser.write(pack)
         response = self.ser.read(10)
@@ -148,7 +144,7 @@ class MotorControl:
             pack[CRC] = crc_int >> 8
             pack[CRC + 1] = crc_int & 0xff
         except Exception as e:
-            print(f"CRC计算失败: {e}")
+            print(f"CRC calculation failed: {e}")
             return None
         self.ser.write(pack)
         response = self.ser.read(10)
@@ -345,7 +341,7 @@ class MotorControl:
                         if flag:
                             print(f"{PARAMETERS_NAME[value_address]}: {read_data}")
                 except Exception as e:
-                    print(f"ID: {motor_id} 读取失败: {e}")
+                    print(f"ID: {motor_id} Read failed: {e}")
                     continue
             values.append(value)
             if flag:
